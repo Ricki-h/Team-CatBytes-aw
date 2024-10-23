@@ -81,9 +81,24 @@ def board_array_data(board_array, X_or_O_turn, end_game, x, y):
 
 # Função para linha que diz quem venceu
 def win_line(board_array, X_or_O_turn, end_game, x, y):
-    if x < 3 and y < 3:
-        if X_or_O_turn == 'x' and board_array[y][x]
-
+    if board_array[0][0] == 'x' and board_array[0][1] == 'x' and board_array[0][2] == 'x' \
+    or board_array[0][0] == 'o' and board_array[0][1] == 'o' and board_array[0][2] == 'o':
+        pg.draw.line(window, azul, (30, 100), (570, 100), 10 )
+        end_game = 1
+        X_or_O_turn = 'x'
+    elif board_array[1][0] == 'x' and board_array[1][1] == 'x' and board_array[1][2] == 'x' \
+    or board_array[1][0] == 'o' and board_array[1][1] == 'o' and board_array[1][2] == 'o':
+        pg.draw.line(window, azul, (30, 300), (570, 300), 10)
+        end_game = 1
+        X_or_O_turn = 'x'
+    elif board_array[2][0] == 'x' and board_array[2][1] == 'x' and board_array[2][2] == 'x' \
+    or board_array[2][0] == 'x' and board_array[2][1] == 'x' and board_array[2][2] == 'x' \
+        pg.draw.line(window, azul, (30, 500), (570, 500), 10)
+        end_game = 1
+        X_or_O_turn = 'x'
+    elif board_array[0][2] == 'x' and board_array[1][2] == 'x' and board_array[2][2] == 'x' \
+    or board_array[0][2] == 'o' and board_array[1][2] == 'o' and board_array[2][2] == 'o':
+        pg.draw.line(windos, azul, )
 
 while True:
     for event in pg.event.get():
@@ -113,6 +128,5 @@ while True:
         clique_last_status = 0
     
     pg.display.update()
-
 
 
