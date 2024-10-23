@@ -1,85 +1,119 @@
-# biblioteca (s) importarda (s)
-from random import randint
-from time import sleep
+# Bibliotecas
 import sys
+from time import sleep
 
-# interface player
-player = str(input('Digite o seu nome/apelido (máximo de 10 caracteres): ')).strip()
+# Início do programa
+nome = str(input('Por favor, digite um nome de usuário com no máximo 10 caracteres: ')).strip()
 sleep(1)
-print ('PROCESSANDO.')
+print('CARREGANDO.')
 sleep(1)
-print ('PROCESSANDO..')
+print('CARREGANDO..')
 sleep(1)
-print ('PROCESSANDO...')
+print('CARREGANDO...')
 sleep(1)
 
-# condição de nome/apelido de jogador
-if len(player) >=1 and len(player) <= 10:
-    print ('O seu nome de usuário não entra em conflito com as regras estabelecidas.')
+# Condições de medição do comprimento do nome de usuário do jogador
+letras = len(nome)
+if letras >=1 and letras <= 10:
+    print('Seu nome está de acordo com as normas!')
     sleep(1)
-    next = str(input('Por favor digite "NEXT" para seguir em frente: ')).strip()
+    next = str(input('Por favor, prossiga em frente com o programa ao digitar "NEXT": ')).strip()
     next.lower()
-    if next == 'next':
-        sleep(5)
+    if next.strip() == 'next':
+        sleep(3)
+  
+    # E se o usuário errar o "next"?
     else:
-        print ('Tenho quase certeza que não é bem assim...')
         sleep(1)
-        print ('Tente novamente por favor!')
+        print(f'O nome da função não é esse, jogador {nome}! Õ_Ô')
         sleep(1)
-        next = str(input('Por favor digite "NEXT" para seguir em frente: '))
-        
-        
-    # condição para continuar jogo
-elif len(player) > 10 or len(player) == 0:
-    print ('O seu nome de usuário entra em conflito com as regras estabelecidas.')
-    sleep(2)
-    print ('GAME OVER: Regras devem ser cumpridas...')
+        print('Tente de novo!')
+        next = str(input('Por favor, prossiga em frente com o programa ao digitar "NEXT": ')).strip()
+        next.lower()
+    # E se ele errar mais de uma vez?
+        if next.strip() != 'next':
+            sleep(1)
+            print('Poxa, você errou de novo?')
+            sleep(1)
+            print('Vamos reiniciar para facilitar para você!')
+            sleep(1)
+            sys.exit()
+
+# Condição para o jogador que não escrever (o nome de usuário) da forma esperada
+else:
+    print(f'Seu nome ultrapassa os caracteres, jogador {nome}.')
     sleep(1)
-    print ('Reinicie o programa!!!')
+    print('Reinicie o programa e tente novamente, por favor!')
+    sleep(1)
     sys.exit()
 
-# Saudações e explicação do jogo
-print ('Bem vindo ao "Jogo da Velha: Two Die", jogador {}!'.format(player))
+# Início propriamente dito do Menu
+print(f'Bem-vindo, jogador(a) {nome}!')
 sleep(1)
-print ('Vamos lá, como o próprio nome já diz, esse jogo é um jogo da velha.')
+print('Esse sistema que você está acessando em específico é o de um simples jogo: o Jogo da Velha!')
 sleep(1)
-print ('Sim sim, o típico jogo da velha, você escolhe com qual símbolo vai ficar e quem fizer uma diagonal, com três símbolos iguais, primeiro...')
+print('Ele é bem simples, caso você não conheça. Quem fizer uma linha reta com o mesmo símbolo primeiro...')
 sleep(1)
-print ('Ganha! ^w^')
-sleep(2)
+print('Ganha! =D')
+sleep(1)
 
-# Opções de Menu e como acessar
+def exibir_menu():
+    print("Menu:")
+    sleep(1)
+    print("1. Home")
+    sleep(1)
+    print("2. Jogar")
+    sleep(1)
+    print("3. História")
+    sleep(1)
+    print("4. Sair")
+    sleep(1)
 
-print ('Aqui estão as opções de Menu, por favor digite: ')
-sleep(1)
-print ('"Home" para acessar o Menu')
-sleep(1)
-print ('"Jogar" para começar o jogo ')
-sleep(1)
-# print ('Estilo: ')
-print ('"Sair" para fechar o programa ')
-sleep(1)
-menu = input('Digite o que você deseja: ')
+def home():
+    # Lógica para adicionar uma nova tarefa
+    print("Menu:")
+    sleep(1)
+    print("1. Home")
+    sleep(1)
+    print("2. Jogar")
+    sleep(1)
+    print("3. História")
+    sleep(1)
+    print("4. Sair")
+    sleep
 
-# Condição do Menu
-menu.lower
-# Condição do Menu Home
-if menu == 'home':
-    print ('Aqui estão as opções de Menu, por favor digite: ')
+def jogar():
+    # Lógica para exibir as tarefas existentes
+    print ('JOGO')
+
+def historia():
+    print('Por ser um jogo muito antigo, o Jogo da Velha não tem realmente uma explicação concreta e única para a sua origem,\njá que as partidas mais antigas da brincadeira datam de séculos passados, desde o século 14, com uma imensidade\nde registros no Egito, na China, na América pré-colombiana e no Império Romano.Porém, na teoria mais aceita, acredita-se\nque a expansão do jogo à Europa o fez explodir de verdade: na Inglaterra, quando as mulheres mais velhas já não tinham\nmais capacidade visual de bordar graças às limitações da idade, era sugerido esse jogo para que elas tivessem outro\nhobby/passatempo; por esse motivo, no Brasil, é conhecido atualmente como Jogo da Velha.')
+
+def saida():
+    print('Saindo.')
     sleep(1)
-    print ('"Home" para acessar o Menu')
+    print('Saindo..')
     sleep(1)
-    print ('"Jogar" para começar o jogo ')
+    print('Saindo...')
     sleep(1)
-    # print ('Estilo: ')
-    print ('"Sair" para fechar o programa ')
-    sleep(1)
-    menu = input('Digite o que você deseja: ')
-# Condição do Menu Jogar
-elif menu == 'jogar':
-    import teste
-    teste.jogar_velha
-menu = input('Digite o que você deseja: ')
-#Condição do Menu Sair
-if menu == 'sair':
-    quit()
+    sys.exit()
+
+def main():
+    while True:
+        exibir_menu()
+            
+        escolha = input("Digite o que você deseja: ")
+            
+        if escolha == "1":
+            home()
+        elif escolha == "2":
+            jogar()
+        elif escolha == "3":
+            historia()
+        elif escolha == "4":
+            saida()
+        else:
+            print("Opção inválida. Tente novamente.")
+
+if __name__ == "__main__":
+    main()
