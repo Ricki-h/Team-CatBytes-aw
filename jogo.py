@@ -39,6 +39,7 @@ end_game = 0
 
 # Desenahndo linhas do jogo, com window sendo a janela, preto a cor das linhas, (205, 0) o começo da ponta da linha, (205, 600) o final da ponta da linha e 10 a largura da linha
 def grade_do_tabuleiro(window):
+    pg.draw.rect(window, branco_smoke, (0, 0, 600, 600))
     pg.draw.line(window, preto, (205, 0), (205, 600), 10)
     pg.draw.line(window, preto, (405, 0), (405, 600), 10)
     pg.draw.line(window, preto, (0, 205), (600, 205), 10)
@@ -123,8 +124,45 @@ def win_line(board_array, end_game,  X_or_O_turn):
         X_or_O_turn = 'x'
     return end_game, X_or_O_turn
 
+# Desenho do botão 'Recomeçar', com o 1 significando True, amarelo sendo a sua cor de fundo e preto a cor do texto
 def botao_restart(window):
     pg.draw.rect(window, amarelo, (700, 100, 200, 65))
+    texto = fonte.render('Rcomeçar', 1, preto)
+    window.blit(texto, (750, 110))
+
+# Função de recomeçar jogo
+def jogo_restart(board_array, x, y, end_game, clique_on_off):
+    if click_on_off == 1 and end_game == 1:
+        if x >= 700 and x <= 900 and y >= 100 and y <= 165:
+            board_array = [['n', 'n', 'n'],
+                          ['n', 'n', 'n'],
+                          ['n', 'n', 'n']]
+            end_game = 0 #Renderizar todo o jogo para branco, pois o 'n' significa null
+    return board_array, end_game
+
+# Função para saber se o jogo empatou e então ele acaba
+def jogo_status(board_array, X_or_O_turn, end_game):
+    count = 0
+    for n in range(3):
+        for nn in range(3):
+            if board_array[nn][n] != 'n':
+                count += 1
+    if count == 9 and X_or_O_turn == 'x': #se a variável count conseguir contar até 9 significa que o jogo empatou
+        X_or_O_turn = 'o'
+        end_game = 1
+    if count == 9 and X_or_O_turn == 'o':
+        X_or_O_turn = 'x'
+        end_game = 1
+    return end_game, X_or_O_turn
+
+# Desenho do X
+def jogador_x(window, x, y):
+    pg.draw.line(window, roxo ((x * 200) + 30, (y * 200) +30), ((x * 200) + 180, (y * 200) + 180), 10)
+    pg.draw.line(window, roxo ((x * 200) + 180, (y * 200) +30), ((x * 200) + 30, (y * 200) + 180), 10)
+
+def jogadro_o(window, x, y):
+    pg.draw.line(window, rosa ((x * 200) + 105, (y * 200) + 105), 75)
+    pg.draw.line(window, rosa ((x * 200) + 105, (y * 200) + 105), 65)
 
 while True:
     for event in pg.event.get():
@@ -148,6 +186,8 @@ while True:
     board_array, X_or_O_turn = board_array_data(board_array, X_or_O_turn, end_game, clique_position_x, clique_position_y)
     end_game, X_or_O_turn = win_line(board_array, end_game,  X_or_O_turn)
     botao_restart(window)
+    board_array, end_game = jogo_restart(board_array, seta_position_x, seta_position_y, end_game, clique_on_off)
+    end_game, X_or_O_turn = jogo_status(board_array, X_or_O_turn, end_game)
 
     # Último status do clique
     if clique[0] == 1:
@@ -156,5 +196,3 @@ while True:
         clique_last_status = 0
     
     pg.display.update()
-
-
