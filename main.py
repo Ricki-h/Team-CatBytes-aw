@@ -3,7 +3,6 @@ import sys
 from time import sleep
 import pygame as pg 
 import math
-import pandas as pd
 
 # Início do programa
 nome = str(input('Por favor, digite um nome de usuário com no máximo 10 caracteres: ')).strip()
